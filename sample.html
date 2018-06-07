@@ -1,0 +1,44 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+        <script src="zer0boxPaging.js"></script>
+    </head>
+    <body>
+        <select id="pagePerNum">
+            <option value="5">5</option>
+            <option value="10">10</option>
+            <option value="15">15</option>
+            <option value="20">20</option>
+        </select>
+        <div id="paging">
+
+        </div>
+    </body>
+    <script>
+
+        var showPage = 1;//현재 페이지
+        listCall(showPage);
+
+        $("#pagePerNum").change(function(){
+            listCall(showPage);
+        });
+
+        function listCall(page){
+            var availPage = Math.round(120/$("#pagePerNum").val());
+            showPage = page;
+            $("#paging").zer0boxPaging({
+                viewRange : 5,
+                currPage : showPage,
+                maxPage : availPage,
+                clickAction : function(e){
+                    //console.log(e);
+                    console.log($(this).attr('page'));
+                    listCall($(this).attr('page'));
+                }
+            });
+        }
+
+
+    </script>
+</html>
